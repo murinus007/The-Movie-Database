@@ -24,11 +24,6 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     var isFavourite = false
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
     override func prepareForReuse() {
         super.prepareForReuse()
         favouriteButton.setImage(.init(systemName: "heart"), for: .normal)

@@ -50,6 +50,7 @@ class DetailViewController: UIViewController {
         voteLabel.text = String(Double(round(data.voteAverage * 10) / 10))
         overviewLabel.text = data.overview
         MovieService.shared.getTrailer(movieId: String(data.id)) { trailer in
+            guard !trailer.results.isEmpty else { return }
             self.playerView.load(withVideoId: trailer.results[0].key)
         }
     }

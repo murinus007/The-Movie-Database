@@ -23,13 +23,15 @@ class MovieService {
     
     func getMovies(closure: @escaping (Result) -> ()) {
         AF.request(urlMovies).responseDecodable (of: Result.self) { responce  in
-            closure(responce.value!)
+            guard let value = responce.value else { return }
+            closure(value)
         }
     }
     
     func getSeries(closure: @escaping (Result) -> ()) {
         AF.request(urlSeries).responseDecodable (of: Result.self) { responce  in
-            closure(responce.value!)
+            guard let value = responce.value else { return }
+            closure(value)
         }
     }
     
@@ -44,7 +46,6 @@ class MovieService {
         let url = "https://api.themoviedb.org/3/movie/\(movieId)/videos?api_key=d6bb029f551109d308371d9f913ac830&language=en-US"
         
         AF.request(url).responseDecodable (of: Trailer.self) { responce  in
-            print(responce)
             if responce.value != nil { closure(responce.value!) }
         
         }

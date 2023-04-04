@@ -11,14 +11,14 @@ import RealmSwift
 class DataService {
     
     static var shared: DataService = {
-            let instance = DataService()
-            return instance
-        }()
+        let instance = DataService()
+        return instance
+    }()
     
     let realm = try! Realm()
     
     func objectExist (id: Int) -> Bool {
-            return realm.object(ofType: DataModel.self, forPrimaryKey: id) != nil
+        return realm.object(ofType: DataModel.self, forPrimaryKey: id) != nil
     }
     
     func saveData(data: DataModel) {
@@ -41,9 +41,10 @@ class DataService {
     }
     
     func deleteData(data: DataModel) {
-        let obj = realm.object(ofType: DataModel.self, forPrimaryKey: data.id)
-        try! realm.write {
-            realm.delete(obj!)
+        if let obj = realm.object(ofType: DataModel.self, forPrimaryKey: data.id)
+        { try! realm.write {
+            realm.delete(obj)
+        }
         }
     }
     
